@@ -40,7 +40,8 @@ namespace GCS.Scanning
                 {"true", TokenType.TRUE },
                 {"var", TokenType.VAR },
                 {"while", TokenType.WHILE },
-                {"string", TokenType.STRIN },
+				{"BeAware", TokenType.BEAWARE },
+				{"string", TokenType.STRIN },
                 {"char", TokenType.CHAR },
                 {"bool", TokenType.BOOL },
                 {"int",TokenType.INT }

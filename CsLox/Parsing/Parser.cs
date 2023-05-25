@@ -434,10 +434,10 @@ namespace GCS.Parsing
 					// No initialiser
 					process = null;
 				}
-				else if (Match(TokenType.VAR))
+				else if (Match(TokenType.VAR) || Match(TokenType.INT) || Match(TokenType.STRIN) || Match(TokenType.BOOL))
 				{
 					// Its a variable decalration
-					process = VarDeclaration1();
+					process = Declaration();
 				}
 				else
 				{
