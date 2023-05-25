@@ -1,14 +1,15 @@
-﻿using CsLox.ErrorHandlers;
-using CsLox.Parsing;
-using CsLox.Runtime;
-using CsLox.Scanning;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
+﻿using GCS.ErrorHandlers;
+using GCS.Parsing;
+using GCS.Runtime;
+using GCS.Scanning;
+using GCS.SyntaxTree;
+using GCS.Tokens;
+using GCS.Runtime;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace CsLox
+namespace GCS
 {
     internal class GameCharacterSharp
     {

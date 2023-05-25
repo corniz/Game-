@@ -1,4 +1,4 @@
-﻿namespace CsLox.Tokens
+﻿namespace GCS.Tokens
 {
     internal class Token
     {

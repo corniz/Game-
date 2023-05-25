@@ -1,12 +1,12 @@
-﻿using CsLox.Exceptions;
-using CsLox.SyntaxTree;
+﻿using GCS.Exceptions;
+using GCS.SyntaxTree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class GCSFunction : IGCSCallable
     {

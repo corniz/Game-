@@ -1,13 +1,15 @@
-﻿using CsLox.ErrorHandlers;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
+﻿using GCS.ErrorHandlers;
+using GCS.SyntaxTree;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GCS.SyntaxTree.Expr;
+using static GCS.SyntaxTree.Stmt;
 
-namespace CsLox.Parsing
+namespace GCS.Parsing
 {
 
     class Parser
@@ -67,7 +69,7 @@ namespace CsLox.Parsing
                 return null;
             }
         }
-
+        Stmt ST = new Stmt.Continue { };
         private Stmt BoolDeclaration()
         {
             Token name = Consume(TokenType.IDENTIFIER, "Expect int name.");
@@ -117,7 +119,20 @@ namespace CsLox.Parsing
             if (Match(TokenType.EQUAL))
             {
                 initializer = Expression();
+                StringBuilder build = new StringBuilder();
+
+                if ((initializer as Expr.Literal) != null)
+                {
+                    build.Append((initializer as Expr.Literal).Value);
+                    if (!build.ToString().All(char.IsDigit))
+                    {
+                        name = Consume(TokenType.SUPER, "Expected int value.");
+                    }
+                }
             }
+
+            Stmt output = 
+                string var = (output as varDeclaration).Initilizer as Literal).Value
 
             Consume(TokenType.SEMICOLON, "Expect ';' after int declaration.");
             return new Stmt.VarDeclaration(name, initializer);

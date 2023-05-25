@@ -1,15 +1,15 @@
-﻿using CsLox.Exceptions;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
+﻿using GCS.Exceptions;
+using GCS.SyntaxTree;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CsLox.Collections;
-using CsLox.ErrorHandlers;
+using GCS.Collections;
+using GCS.ErrorHandlers;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class Interpreter : Expr.IVisitor<object>, Stmt.IVisitor<object>
     {

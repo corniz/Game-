@@ -1,21 +1,18 @@
-﻿using CsLox.Collections;
-using CsLox.Exceptions;
-using CsLox.Tokens;
+﻿using GCS.Collections;
+using GCS.Exceptions;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class GCSEnvironment
     {
-
-        private readonly HashMap<string, object> _values = new HashMap<string, object>();
-
         public GCSEnvironment Enclosing {get;}
-
+        private readonly HashMap<string, object> _values = new HashMap<string, object>();
         public GCSEnvironment()
         {
             this.Enclosing = null;

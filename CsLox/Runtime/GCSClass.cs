@@ -1,11 +1,11 @@
-﻿using CsLox.Collections;
+﻿using GCS.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class GCSClass : IGCSCallable
     {

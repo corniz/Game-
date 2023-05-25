@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.ExtensionMethods
+namespace GCS.ExtensionMethods
 {
     public static class StringExtensions
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime.NativeFunctions
+namespace GCS.Runtime.NativeFunctions
 {
     class Clock : IGCSCallable
     {

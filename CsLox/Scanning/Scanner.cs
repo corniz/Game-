@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CsLox.Tokens;
-using CsLox.ExtensionMethods;
-using CsLox.ErrorHandlers;
+using GCS.Tokens;
+using GCS.ExtensionMethods;
+using GCS.ErrorHandlers;
 
-namespace CsLox.Scanning
+namespace GCS.Scanning
 {
     class Scanner
     {

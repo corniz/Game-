@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Tokens
+namespace GCS.Tokens
 {
     public enum TokenType
     {

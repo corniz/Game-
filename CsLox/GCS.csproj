@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AstPainter.cs" />
+    <Compile Include="Collections\HashMap.cs" />
+    <Compile Include="Collections\StackList.cs" />
     <Compile Include="GameCharacterSharp.cs" />
     <Compile Include="ErrorHandlers\ConsoleErrorHandler.cs" />
     <Compile Include="ErrorHandlers\IErrorHandler.cs" />
@@ -98,7 +100,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Collections\" />
     <Folder Include="Environments\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

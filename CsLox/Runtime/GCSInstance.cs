@@ -1,13 +1,13 @@
-﻿using CsLox.Collections;
-using CsLox.Exceptions;
-using CsLox.Tokens;
+﻿using GCS.Collections;
+using GCS.Exceptions;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class GCSInstance
     {
