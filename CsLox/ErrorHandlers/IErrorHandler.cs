@@ -1,7 +1,7 @@
-﻿using CsLox.Exceptions;
-using CsLox.Tokens;
+﻿using GCS.Exceptions;
+using GCS.Tokens;
 
-namespace CsLox.ErrorHandlers
+namespace GCS.ErrorHandlers
 {
     interface IErrorHandler
     {

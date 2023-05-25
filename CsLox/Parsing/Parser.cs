@@ -1,16 +1,16 @@
-﻿using CsLox.ErrorHandlers;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
+﻿using GCS.ErrorHandlers;
+using GCS.SyntaxTree;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
-using static CsLox.SyntaxTree.Expr;
-using static CsLox.SyntaxTree.Stmt;
+using static GCS.SyntaxTree.Expr;
+using static GCS.SyntaxTree.Stmt;
 
-namespace CsLox.Parsing
+namespace GCS.Parsing
 {
 
     class Parser
@@ -58,7 +58,9 @@ namespace CsLox.Parsing
                 if (Match(TokenType.CLASS)) return ClassDeclaration();
                 if (Match(TokenType.FUN)) return Function("function");
                 if (Match(TokenType.VAR)) return VarDeclaration();
-
+                if (Match(TokenType.STRIN)) return StrinDeclaration();
+                if (Match(TokenType.INT)) return IntDeclaration();
+                if (Match(TokenType.BOOL)) return BoolDeclaration();
                 return Statement();
             }
             catch (ParseErrorException)
@@ -67,6 +69,71 @@ namespace CsLox.Parsing
                 Synchronise();
                 return null;
             }
+        }
+        Stmt ST = new Stmt.Continue { };
+        private Stmt BoolDeclaration()
+        {
+            Token name = Consume(TokenType.IDENTIFIER, "Expect int name.");
+
+            // If there is a equals, the int is initalized
+            Expr initializer = null;
+            if (Match(TokenType.EQUAL))
+            {
+                initializer = Expression();
+                StringBuilder build = new StringBuilder();
+
+                if ((initializer as Expr.Literal) != null)
+                {
+                    build.Append((initializer as Expr.Literal).Value);
+                    if (build.ToString().ToLower() != "true" && build.ToString().ToLower() != "false")
+                    {
+                        name = Consume(TokenType.SUPER, "Expected boolean value.");
+                    }
+                }
+            }
+
+            Consume(TokenType.SEMICOLON, "Expect ';' after int declaration.");
+            return new Stmt.VarDeclaration(name, initializer);
+        }
+
+        private Stmt StrinDeclaration()
+        {
+            Token name = Consume(TokenType.IDENTIFIER, "Expect string name.");
+
+            // If there is a equals, the string is initalized
+            Expr initializer = null;
+            if (Match(TokenType.EQUAL))
+            {
+                initializer = Expression();
+            }
+
+            Consume(TokenType.SEMICOLON, "Expect ';' after string declaration.");
+            return new Stmt.VarDeclaration(name, initializer);
+        }
+
+        private Stmt IntDeclaration()
+        {
+            Token name = Consume(TokenType.IDENTIFIER, "Expect int name.");
+
+            // If there is a equals, the int is initalized
+            Expr initializer = null;
+            if (Match(TokenType.EQUAL))
+            {
+                initializer = Expression();
+                StringBuilder build = new StringBuilder();
+
+                if ((initializer as Expr.Literal) != null)
+                {
+                    build.Append((initializer as Expr.Literal).Value);
+                    if (!build.ToString().All(char.IsDigit))
+                    {
+                        name = Consume(TokenType.SUPER, "Expected int value.");
+                    }
+                }
+            }
+
+            Consume(TokenType.SEMICOLON, "Expect ';' after int declaration.");
+            return new Stmt.VarDeclaration(name, initializer);
         }
 
         /// <summary>

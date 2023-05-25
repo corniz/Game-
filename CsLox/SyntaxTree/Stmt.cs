@@ -1,11 +1,11 @@
-﻿using CsLox.Tokens;
+﻿using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.SyntaxTree
+namespace GCS.SyntaxTree
 {
     abstract class Stmt
     {

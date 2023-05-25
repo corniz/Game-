@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Tokens
+namespace GCS.Tokens
 {
     public enum TokenType
     {
@@ -22,7 +22,7 @@ namespace CsLox.Tokens
 
         // Keywords.
         AND, BREAK, CLASS, CONTINUE, DO, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
-        PRINT, RETURN, SUPER, THIS, TRUE, VAR, BEAWARE, WHILE,
+        PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE,STRIN,CHAR,BOOL,INT,
 
         EOF
     }

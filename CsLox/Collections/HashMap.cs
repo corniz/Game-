@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Collections
+namespace GCS.Collections
 {
     /// <summary>
     /// HashMap to add Get and Put similar to the Java behaviour
@@ -40,7 +40,7 @@ namespace CsLox.Collections
             {
                 old_value = this[key];
                 this[key] = value;
-                
+
             }
             else
             {

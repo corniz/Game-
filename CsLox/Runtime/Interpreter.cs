@@ -1,23 +1,23 @@
-﻿using CsLox.Exceptions;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
+﻿using GCS.Exceptions;
+using GCS.SyntaxTree;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CsLox.Collections;
-using CsLox.ErrorHandlers;
+using GCS.Collections;
+using GCS.ErrorHandlers;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class Interpreter : Expr.IVisitor<object>, Stmt.IVisitor<object>
     {
         private readonly IErrorHandler _error_handler;
-        private readonly LoxEnvironment _globals = new LoxEnvironment();
+        private readonly GCSEnvironment _globals = new GCSEnvironment();
         private readonly HashMap<Expr, int?> _locals = new HashMap<Expr, int?>();
 
-        private LoxEnvironment _environment;
+        private GCSEnvironment _environment;
 
         public Interpreter(IErrorHandler error_handler)
         {
@@ -209,12 +209,12 @@ namespace CsLox.Runtime
             }
 
             // Make sure we the callee is actually callable
-            if (!(callee is ILoxCallable))
+            if (!(callee is IGCSCallable))
             {
                 throw new RuntimeErrorException(expr.Paren, "Can only call functions and classes.");
             }
 
-            ILoxCallable function = (ILoxCallable)callee;
+            IGCSCallable function = (IGCSCallable)callee;
 
             // Make sure we are passing the correct number of arguments
             if (arguments.Count() != function.Arity)
@@ -228,9 +228,9 @@ namespace CsLox.Runtime
         public object Visit(Expr.Get expr)
         {
             object obj = Evaluate(expr.Object);
-            if (obj is LoxInstance)
+            if (obj is GCSInstance)
             {
-                return ((LoxInstance)obj).Get(expr.Name);
+                return ((GCSInstance)obj).Get(expr.Name);
             }
 
             throw new RuntimeErrorException(expr.Name, "Only instances has properties.");
@@ -242,13 +242,13 @@ namespace CsLox.Runtime
         {
             object obj = Evaluate(expr.Object);
 
-            if (!(obj is LoxInstance))
+            if (!(obj is GCSInstance))
             {
                 throw new RuntimeErrorException(expr.Name, "only instances have fields.");
             }
 
             object value = Evaluate(expr.Value);
-            ((LoxInstance)obj).Set(expr.Name, value);
+            ((GCSInstance)obj).Set(expr.Name, value);
             return value;
         }
 
@@ -256,13 +256,13 @@ namespace CsLox.Runtime
         {
             // Look up the superclass
             int? distance = _locals.Get(expr);
-            LoxClass superclass = (LoxClass)_environment.GetAt(distance.Value, "super");
+            GCSClass superclass = (GCSClass)_environment.GetAt(distance.Value, "super");
 
             // "this" is always one level nearer than "super"
-            LoxInstance obj = (LoxInstance)_environment.GetAt(distance.Value - 1, "this");
+            GCSInstance obj = (GCSInstance)_environment.GetAt(distance.Value - 1, "this");
 
             // Lookup the method
-            LoxFunction method = superclass.FindMethod(obj, expr.Method.Lexeme);
+            GCSFunction method = superclass.FindMethod(obj, expr.Method.Lexeme);
 
             if (method == null)
             {
@@ -447,7 +447,7 @@ namespace CsLox.Runtime
 
         public object Visit(Stmt.Block stmt)
         {
-            ExecuteBlock(stmt.Statements, new LoxEnvironment(_environment));
+            ExecuteBlock(stmt.Statements, new GCSEnvironment(_environment));
             return null;
         }
 
@@ -502,7 +502,7 @@ namespace CsLox.Runtime
 
         public object Visit(Stmt.Function stmt)
         {
-            LoxFunction function = new LoxFunction(stmt, _environment, false);
+            GCSFunction function = new GCSFunction(stmt, _environment, false);
             _environment.Define(stmt.Name.Lexeme, function);
             return null;
         }
@@ -516,25 +516,25 @@ namespace CsLox.Runtime
             if (stmt.Superclass != null)
             {
                 superclass = Evaluate(stmt.Superclass);
-                if (!(superclass is LoxClass))
+                if (!(superclass is GCSClass))
                 {
                     throw new RuntimeErrorException(stmt.Superclass.Name, "Superclass must be a class.");
                 }
 
-                _environment = new LoxEnvironment(_environment);
+                _environment = new GCSEnvironment(_environment);
                 _environment.Define("super", superclass);
             }
 
 
             // Methods
-            HashMap<string, LoxFunction> methods = new HashMap<string, LoxFunction>();
+            HashMap<string, GCSFunction> methods = new HashMap<string, GCSFunction>();
             foreach (Stmt.Function method in stmt.Methods)
             {
-                LoxFunction function = new LoxFunction(method, _environment, method.Name.Lexeme.Equals("init"));
+                GCSFunction function = new GCSFunction(method, _environment, method.Name.Lexeme.Equals("init"));
                 methods.Put(method.Name.Lexeme, function);
             }
 
-            LoxClass @class = new LoxClass(stmt.Name.Lexeme, (LoxClass)superclass, methods);
+            GCSClass @class = new GCSClass(stmt.Name.Lexeme, (GCSClass)superclass, methods);
 
             if (superclass != null)
             {
@@ -550,10 +550,10 @@ namespace CsLox.Runtime
         /// </summary>
         /// <param name="statements">The statements</param>
         /// <param name="environment">The environment</param>
-        public void ExecuteBlock(IEnumerable<Stmt> statements, LoxEnvironment environment)
+        public void ExecuteBlock(IEnumerable<Stmt> statements, GCSEnvironment environment)
         {
             // Save the current environment
-            LoxEnvironment previous = this._environment;
+            GCSEnvironment previous = this._environment;
 
             try
             {

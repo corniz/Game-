@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Exceptions
+namespace GCS.Exceptions
 {
     class BreakException : Exception
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CsLox.Tokens;
-using CsLox.ExtensionMethods;
-using CsLox.ErrorHandlers;
+using GCS.Tokens;
+using GCS.ExtensionMethods;
+using GCS.ErrorHandlers;
 
-namespace CsLox.Scanning
+namespace GCS.Scanning
 {
     class Scanner
     {
@@ -23,14 +23,13 @@ namespace CsLox.Scanning
             new Dictionary<string, TokenType>() {
                 {"and", TokenType.AND },
                 {"break", TokenType.BREAK },
-                {"class", TokenType.CLASS },
+                {"gameCharacter", TokenType.CLASS },
                 {"continue", TokenType.CONTINUE },
                 {"do", TokenType.DO },
                 {"else", TokenType.ELSE },
                 {"false", TokenType.FALSE },
-                {"for", TokenType.FOR },
-				{"BeAware", TokenType.BEAWARE },
-				{"fun", TokenType.FUN },
+                {"runFor", TokenType.FOR },
+                {"fun", TokenType.FUN },
                 {"if", TokenType.IF },
                 {"nil", TokenType.NIL },
                 {"or", TokenType.OR },
@@ -40,7 +39,11 @@ namespace CsLox.Scanning
                 {"this", TokenType.THIS },
                 {"true", TokenType.TRUE },
                 {"var", TokenType.VAR },
-                {"while", TokenType.WHILE }
+                {"while", TokenType.WHILE },
+                {"string", TokenType.STRIN },
+                {"char", TokenType.CHAR },
+                {"bool", TokenType.BOOL },
+                {"int",TokenType.INT }
             };
 
         /// <summary>

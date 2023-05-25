@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Runtime.NativeFunctions
+namespace GCS.Runtime.NativeFunctions
 {
-    class Clock : ILoxCallable
+    class Clock : IGCSCallable
     {
         private static readonly DateTime _unix_epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 

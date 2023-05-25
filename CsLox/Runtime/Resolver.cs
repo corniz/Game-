@@ -1,16 +1,16 @@
-﻿using CsLox.Collections;
-using CsLox.Runtime;
-using CsLox.SyntaxTree;
-using CsLox.Tokens;
-using CsLox.ExtensionMethods;
+﻿using GCS.Collections;
+using GCS.Runtime;
+using GCS.SyntaxTree;
+using GCS.Tokens;
+using GCS.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CsLox.ErrorHandlers;
+using GCS.ErrorHandlers;
 
-namespace CsLox.Runtime
+namespace GCS.Runtime
 {
     class Resolver : Expr.IVisitor<object>, Stmt.IVisitor<object>
     {

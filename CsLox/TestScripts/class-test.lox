@@ -1,4 +1,4 @@
-﻿class Bacon {
+﻿gameCharacter Bacon {
   eat() {
     print "Crunch crunch crunch!";
   }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.Collections
+namespace GCS.Collections
 {
     /// <summary>
     /// Represents a stack that can be indexed

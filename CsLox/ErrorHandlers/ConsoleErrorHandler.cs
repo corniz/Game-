@@ -1,12 +1,12 @@
-﻿using CsLox.Exceptions;
-using CsLox.Tokens;
+﻿using GCS.Exceptions;
+using GCS.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsLox.ErrorHandlers
+namespace GCS.ErrorHandlers
 {
     class ConsoleErrorHandler : IErrorHandler
     {
