@@ -10,8 +10,8 @@ namespace CsLox.ErrorHandlers
 
         void Reset();
         void Error(int line, string message);
-        void Error(Token token, string message);
+		void Error1(string message);
+		void Error(Token token, string message);
         void Error(RuntimeErrorException error);
-
     }
 }

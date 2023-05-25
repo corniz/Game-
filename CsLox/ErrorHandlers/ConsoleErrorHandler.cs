@@ -23,13 +23,18 @@ namespace CsLox.ErrorHandlers
 
             Report(line, "", message);
         }
+		public void Error1(string message)
+		{
 
-        /// <summary>
-        /// Log a parsing error
-        /// </summary>
-        /// <param name="token">The token</param>
-        /// <param name="message">The error message</param>
-        public void Error(Token token, string message)
+			Report1(message);
+		}
+
+		/// <summary>
+		/// Log a parsing error
+		/// </summary>
+		/// <param name="token">The token</param>
+		/// <param name="message">The error message</param>
+		public void Error(Token token, string message)
         {
             if (token.Type == TokenType.EOF)
             {
@@ -78,6 +83,10 @@ namespace CsLox.ErrorHandlers
         {
             Console.Error.WriteLine("[line {0}] Error {1}: {2}", line, where, message);
         }
-    }
+		private void Report1(string message)
+		{
+			Console.Error.WriteLine("{0}", message);
+		}
+	}
 
 }

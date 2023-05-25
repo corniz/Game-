@@ -60,7 +60,7 @@ namespace CsLox
         {
             while (true)
             {
-                Console.Write("> ");
+                Console.Write(">> ");
 
                 string code = Console.ReadLine();
 

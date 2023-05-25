@@ -4,8 +4,11 @@ using CsLox.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
+using static CsLox.SyntaxTree.Expr;
+using static CsLox.SyntaxTree.Stmt;
 
 namespace CsLox.Parsing
 {
@@ -162,7 +165,8 @@ namespace CsLox.Parsing
             if (Match(TokenType.CONTINUE)) return ContinueStatement();
             if (Match(TokenType.DO)) return DoStatement();
             if (Match(TokenType.FOR)) return ForStatement();
-            if (Match(TokenType.IF)) return IfStatement();
+			if (Match(TokenType.BEAWARE)) return BeAwareStatement();
+			if (Match(TokenType.IF)) return IfStatement();
             if (Match(TokenType.PRINT)) return PrintStatement();
             if (Match(TokenType.RETURN)) return ReturnStatement();
             if (Match(TokenType.WHILE)) return WhileStatement();
@@ -337,13 +341,102 @@ namespace CsLox.Parsing
 
 
         }
+		private Stmt BeAwareStatement()
+		{
+            Stmt output = new Stmt.ExpressionStatement(null);
+			try
+			{
+				Consume(TokenType.LEFT_PAREN, "Expect '(' after 'BeAware'.");
 
+				if (Match(TokenType.VAR))
+				{
+					// Be aware
+					output = VarDeclaration1();
+				}
+			}
+			catch (Exception ex)
+			{
+				Error1("We are not aware");
+			}
+			try
+			{
+				// Process
+				Stmt process;
+				if (Match(TokenType.SEMICOLON))
+				{
+					// No initialiser
+					process = null;
+				}
+				else if (Match(TokenType.VAR))
+				{
+					// Its a variable decalration
+					process = VarDeclaration1();
+				}
+				else
+				{
+					// Its an expression
+					process = ExpressionStatement1();
+				}
+				Consume(TokenType.RIGHT_PAREN, "Expect ')' after be aware clauses.");
+				Consume(TokenType.SEMICOLON, "Expect ';' after be aware condition.");
+            }
+            catch (Exception eg)
+			{
+                if ((output as Stmt.VarDeclaration) == null) {
+                    Error1("We are not aware");
+                }
+                else Error1((((output as Stmt.VarDeclaration).Initializer as Literal).Value).ToString());                
+			}
+            return output;
+		}
+		/// <summary>
+		/// Parse a variable declaration 1
+		/// </summary>
+		/// <returns></returns>
+		private Stmt VarDeclaration1()
+		{
+            try
+            {
+                Token name = Consume(TokenType.IDENTIFIER, "Expect variable name.");
 
-        /// <summary>
-        /// Parse while loop
-        /// </summary>
-        /// <returns>The statement</returns>
-        private Stmt WhileStatement()
+                // If there is a equals, the variable is initalized
+                Expr initializer = null;
+                if (Match(TokenType.EQUAL))
+                {
+                    initializer = Expression();
+                }
+
+                Consume(TokenType.SEMICOLON, "Expect ';' after variable declaration.");
+                return new Stmt.VarDeclaration(name, initializer);
+            }
+            catch (Exception aw)
+            {
+                throw;
+            }
+        }
+
+		/// <summary>
+		/// Parse an expression statement 1
+		/// </summary>
+		/// <returns>The statement</returns>
+		private Stmt ExpressionStatement1()
+		{
+            try {
+            Expr expr = Expression();
+            Consume(TokenType.SEMICOLON, "Expect ';' after expression.");
+            return new Stmt.ExpressionStatement(expr);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+		}
+
+		/// <summary>
+		/// Parse while loop
+		/// </summary>
+		/// <returns>The statement</returns>
+		private Stmt WhileStatement()
         {
             _loop_depth++;
 
@@ -730,13 +823,23 @@ namespace CsLox.Parsing
             _error_handler.Error(token, message);
             return new ParseErrorException();
         }
+		/// <summary>
+		/// Create a new error exception, and log
+		/// </summary>
+		/// <param name="token">The token</param>
+		/// <param name="message">The error message</param>
+		private ParseErrorException Error1(string message)
+		{
+			_error_handler.Error1(message);
+			return new ParseErrorException();
+		}
 
-        /// <summary>
-        /// Check if the current token matches one of a set of types, and comsume it if it does
-        /// </summary>
-        /// <param name="types">The tpyes to match</param>
-        /// <returns>True if matched</returns>
-        private bool Match(params TokenType[] types)
+		/// <summary>
+		/// Check if the current token matches one of a set of types, and comsume it if it does
+		/// </summary>
+		/// <param name="types">The tpyes to match</param>
+		/// <returns>True if matched</returns>
+		private bool Match(params TokenType[] types)
         {
             foreach (TokenType type in types)
             {
