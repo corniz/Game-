@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace CsLox.Runtime
 {
-    class LoxInstance
+    class GCSInstance
     {
         private readonly HashMap<string, object> _fields = new HashMap<string, object>();
 
-        private LoxClass _class;
+        private GCSClass _class;
 
-        public LoxInstance(LoxClass @class)
+        public GCSInstance(GCSClass @class)
         {
             this._class = @class;
         }
@@ -35,7 +35,7 @@ namespace CsLox.Runtime
             }
 
             // Method?
-            LoxFunction method = _class.FindMethod(this, name.Lexeme);
+            GCSFunction method = _class.FindMethod(this, name.Lexeme);
             if (method != null) return method;
 
             throw new RuntimeErrorException(name, $"Undefined property '{name.Lexeme}'.");

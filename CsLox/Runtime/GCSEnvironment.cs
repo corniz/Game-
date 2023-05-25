@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace CsLox.Runtime
 {
-    class LoxEnvironment
+    class GCSEnvironment
     {
 
         private readonly HashMap<string, object> _values = new HashMap<string, object>();
 
-        public LoxEnvironment Enclosing {get;}
+        public GCSEnvironment Enclosing {get;}
 
-        public LoxEnvironment()
+        public GCSEnvironment()
         {
             this.Enclosing = null;
         }
 
-        public LoxEnvironment(LoxEnvironment enclosing)
+        public GCSEnvironment(GCSEnvironment enclosing)
         {
             this.Enclosing = enclosing;
         }
@@ -103,9 +103,9 @@ namespace CsLox.Runtime
             Ancestor(distance)._values.Put(name.Lexeme, value);
         }
 
-        private LoxEnvironment Ancestor(int distance)
+        private GCSEnvironment Ancestor(int distance)
         {
-            LoxEnvironment environment = this;
+            GCSEnvironment environment = this;
             for (int i =0; i < distance; i++)
             { 
                 environment = environment.Enclosing;

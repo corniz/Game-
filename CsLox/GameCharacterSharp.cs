@@ -10,12 +10,12 @@ using System.IO;
 
 namespace CsLox
 {
-    internal class CsLox
+    internal class GameCharacterSharp
     {
         private static readonly Interpreter _interpreter;
         private static readonly IErrorHandler _error_handler;
 
-        static CsLox()
+        static GameCharacterSharp()
         {
             _error_handler = new ConsoleErrorHandler();
             _interpreter = new Interpreter(_error_handler);

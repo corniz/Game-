@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace CsLox.Runtime
 {
-    class LoxFunction : ILoxCallable
+    class GCSFunction : IGCSCallable
     {
         private readonly Stmt.Function _declaration;
-        private readonly LoxEnvironment _closure;
+        private readonly GCSEnvironment _closure;
         private readonly bool _is_initializer;
 
         public int Arity => _declaration.Parameters.Count();
 
-        public LoxFunction (Stmt.Function declaration, LoxEnvironment closure, bool is_initializer)
+        public GCSFunction (Stmt.Function declaration, GCSEnvironment closure, bool is_initializer)
         {
             _declaration = declaration;
             _closure = closure;
@@ -27,7 +27,7 @@ namespace CsLox.Runtime
         public object Call(Interpreter interpreter, IList<object> arguments)
         {
             // Environment
-            LoxEnvironment environment = new LoxEnvironment(_closure);
+            GCSEnvironment environment = new GCSEnvironment(_closure);
 
             // Arguments
             for (int i = 0; i < _declaration.Parameters.Count(); i++)
@@ -57,11 +57,11 @@ namespace CsLox.Runtime
         /// </summary>
         /// <param name="instance">The instance</param>
         /// <returns></returns>
-        public LoxFunction Bind(LoxInstance instance)
+        public GCSFunction Bind(GCSInstance instance)
         {
-            LoxEnvironment environment = new LoxEnvironment(_closure);
+            GCSEnvironment environment = new GCSEnvironment(_closure);
             environment.Define("this", instance);
-            return new LoxFunction(_declaration, environment, _is_initializer);
+            return new GCSFunction(_declaration, environment, _is_initializer);
         }
 
         public override string ToString()

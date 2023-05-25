@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CsLox.Runtime
 {
-    interface ILoxCallable
+    interface IGCSCallable
     {
         int Arity { get; }
         object Call(Interpreter interpreter, IList<object> arguments);

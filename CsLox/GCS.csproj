@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5A2BE82F-6F28-448B-99D9-C726DBC41C88}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CsLox</RootNamespace>
-    <AssemblyName>CsLox</AssemblyName>
+    <RootNamespace>GCS</RootNamespace>
+    <AssemblyName>GCS</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,22 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AstPainter.cs" />
-    <Compile Include="Collections\HashMap.cs" />
-    <Compile Include="Collections\StackList.cs" />
-    <Compile Include="CsLox.cs" />
+    <Compile Include="GameCharacterSharp.cs" />
     <Compile Include="ErrorHandlers\ConsoleErrorHandler.cs" />
     <Compile Include="ErrorHandlers\IErrorHandler.cs" />
     <Compile Include="Exceptions\BreakException.cs" />
     <Compile Include="Exceptions\ContinueException.cs" />
-    <Compile Include="Runtime\LoxClass.cs" />
-    <Compile Include="Runtime\LoxEnvironment.cs" />
+    <Compile Include="Runtime\GCSClass.cs" />
+    <Compile Include="Runtime\GCSEnvironment.cs" />
     <Compile Include="Exceptions\ReturnException.cs" />
     <Compile Include="Exceptions\RuntimeErrorException.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
-    <Compile Include="Runtime\ILoxCallable.cs" />
+    <Compile Include="Runtime\IGCSCallable.cs" />
     <Compile Include="Runtime\Interpreter.cs" />
-    <Compile Include="Runtime\LoxFunction.cs" />
-    <Compile Include="Runtime\LoxInstance.cs" />
+    <Compile Include="Runtime\GCSFunction.cs" />
+    <Compile Include="Runtime\GCSInstance.cs" />
     <Compile Include="Runtime\NativeFunctions\Clock.cs" />
     <Compile Include="Parsing\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +98,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Collections\" />
     <Folder Include="Environments\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

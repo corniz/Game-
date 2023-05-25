@@ -39,7 +39,11 @@ namespace CsLox.Scanning
                 {"this", TokenType.THIS },
                 {"true", TokenType.TRUE },
                 {"var", TokenType.VAR },
-                {"while", TokenType.WHILE }
+                {"while", TokenType.WHILE },
+                {"string", TokenType.STRIN },
+                {"char", TokenType.CHAR },
+                {"bool", TokenType.BOOL },
+                {"int",TokenType.INT }
             };
 
         /// <summary>

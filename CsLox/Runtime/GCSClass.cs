@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace CsLox.Runtime
 {
-    class LoxClass : ILoxCallable
+    class GCSClass : IGCSCallable
     {
-        private readonly HashMap<string, LoxFunction> _methods;
+        private readonly HashMap<string, GCSFunction> _methods;
 
         public string Name { get; }
-        public LoxClass Superclass { get; }
+        public GCSClass Superclass { get; }
 
         public int Arity { get
             {
                 // Check if we have a constructor
-                LoxFunction initializer = _methods.Get("init");
+                GCSFunction initializer = _methods.Get("init");
                 if (initializer == null) return 0;
                 return initializer.Arity;
             } }
         
-        public LoxClass(string name, LoxClass superclass, HashMap<string, LoxFunction> methods)
+        public GCSClass(string name, GCSClass superclass, HashMap<string, GCSFunction> methods)
         {
             this.Name = name;
             this.Superclass = superclass;
@@ -31,10 +31,10 @@ namespace CsLox.Runtime
 
         public object Call(Interpreter interpreter, IList<object> arguments)
         {
-            LoxInstance instance = new LoxInstance(this);
+            GCSInstance instance = new GCSInstance(this);
 
             // Constructor
-            LoxFunction initializer = _methods.Get("init");
+            GCSFunction initializer = _methods.Get("init");
             if (initializer != null)
             {
                 initializer.Bind(instance).Call(interpreter, arguments);
@@ -43,7 +43,7 @@ namespace CsLox.Runtime
             return instance;
         }
 
-        public LoxFunction FindMethod(LoxInstance instance, string name)
+        public GCSFunction FindMethod(GCSInstance instance, string name)
         {
             if (_methods.ContainsKey(name))
             {
