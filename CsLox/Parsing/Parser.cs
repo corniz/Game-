@@ -131,9 +131,6 @@ namespace GCS.Parsing
                 }
             }
 
-            Stmt output = 
-                string var = (output as varDeclaration).Initilizer as Literal).Value
-
             Consume(TokenType.SEMICOLON, "Expect ';' after int declaration.");
             return new Stmt.VarDeclaration(name, initializer);
         }
